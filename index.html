@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="guiClonedWarsApp">
 <head>
 
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -18,6 +18,14 @@
 </header>
 
 <body>
+
+<!-- NEW GAME BOARD, Created Dynamically by Angular -->
+
+	<div id="container-div" ng-controller="GuiClonedWarsController">
+
+	</div>
+
+<!-- OLD GAME BOARD -->
 
 	<div id="wrapperdiv" class="wrapper">
 		<div id="cell0" class="gridbox"><span><img src="images/duel.jpg" height="140" width="140">Cell 0</span></div>
