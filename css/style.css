@@ -1,0 +1,91 @@
+/* CSS RESET HERE AT THE TOP, then new style below the next comment */
+
+    html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  font-family: 'Philosopher', serif;
+  vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* EVERYTHING ABOVE HERE IS MY HTML STYLE RESET*/
+
+.header-bar {
+	width: 100%;
+	vertical-align: middle;
+	background-color: black;
+	height: 0 auto;
+	color: white;
+	text-align: center;
+	vertical-align: middle;
+	display: block;
+}
+
+html, body {
+  height: 100%;
+  margin: 0 auto;
+  background-color: black;
+}
+
+.wrapper {
+  width: 540px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.gridbox {
+  height: 150px;
+  width: 150px;
+  float: left;
+  border: 5px solid navy;
+  background-color: CornflowerBlue;
+  color: Crimson;
+  text-align: center;
+  display: table;
+  vertical-align: middle;
+  font-size: 30px;
+  font-family: Verdana;
+  padding: 10px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.gridbox > span {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
