@@ -23,30 +23,17 @@
 
 	<div id="container-div" ng-controller="GuiClonedWarsController">
 
-	</div>
-
-<!-- OLD GAME BOARD -->
-
-	<div id="wrapperdiv" class="wrapper">
-		<div id="cell0" class="gridbox"><span><img src="images/duel.jpg" height="140" width="140">Cell 0</span></div>
-
-		<div id="cell1" class="gridbox"><span><img src="images/duel.jpg" height="140" width="140">Cell 1</span></div>
-
-		<div id="cell2" class="gridbox"><span><img src="images/duel.jpg" height="140" width="140">Cell 2</span></div>
-
-		<div id="cell3" class="gridbox"><span><img src="images/duel.jpg" height="140" width="140">Cell 3</span></div>
-
-		<div id="cell4" class="gridbox"><span><img src="images/duel.jpg" height="140" width="140">Cell 4</span></div>
-
-		<div id="cell5" class="gridbox"><span><img src="images/duel.jpg" height="140" width="140">Cell 5</span></div>
-
-		<div  id="cell6" class="gridbox"><span><img src="images/duel.jpg" height="140" width="140">Cell 6</span></div>
-
-		<div  id="cell7" class="gridbox"><span><img src="images/duel.jpg" height="140" width="140">Cell 7</span></div>
-
-		<div id="cell8" class="gridbox"><span><img src="images/duel.jpg" height="140" width="140">Cell 8</span></div>
-
-	</div>
+        CLICK COUNTER: {{movecounter}}
+        
+        <div class="wrapper" >
+            <div ng-repeat="currentCell in cellList">
+                <div class="gridbox" ng-click="playerPicks(currentCell)"
+                ng-class="{xclass: currentCell.xostatus=='X', oclass: currentCell.xostatus =='O'}"><span>Cell {{currentCell.xostatus}}</span>
+                </div>
+            </div>
+        </div>
+    <br>
+    </div>
 
 </body>
 
