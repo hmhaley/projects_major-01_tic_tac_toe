@@ -109,11 +109,13 @@ html, body {
 .xclass {
   background-image: url("../images/gates.jpg");
   background-color: #49fb35 ;
+  transition:  all 1s;
 }
 
 .oclass {
   background-image: url("../images/jobs.jpg");
   background-color: #ff0101 ;
+  transition:  all 1s;
 }
 
 .blankclass {
