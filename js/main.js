@@ -1,7 +1,11 @@
 var guiClonedWarsApp = angular.module('guiClonedWarsApp', ['firebase']);
-	guiClonedWarsApp.controller('GuiClonedWarsController', function ($scope, $firebase){
 
-		var guiClonedDatabase = new Firebase("https://guiclonedwars.firebaseio.com");
+guiClonedWarsApp.controller('GuiClonedWarsController', function ($scope, $firebase){
+
+$scope.remoteGameContainer = $firebase(new Firebase("https://guiclonedwars.firebaseio.com/databaseGameContainer"));
+
+$scope.testString = "Angular ready and connected";
+
 
 		// $scope.players = [
 		// 	{
@@ -36,36 +40,41 @@ var guiClonedWarsApp = angular.module('guiClonedWarsApp', ['firebase']);
 		// 		move5: ,
 		// 		winOrLose: ,
 		// 	}
-
 		// ] ;
 
-		$scope.allMoves = $firebase(guiClonedDatabase);
+		$scope.cellList = new Object() ;
+    	$scope.cellList["0"] = {cellLocation: "0", xostatus: "not yet played", someVar: "A"} ;
+    	$scope.cellList["1"] = {cellLocation: "1", xostatus: "not yet played", someVar: "A"} ;
+    	$scope.cellList["2"] = {cellLocation: "2", xostatus: "not yet played", someVar: "A"} ;
+    	$scope.cellList["3"] = {cellLocation: "3", xostatus: "not yet played", someVar: "A"} ;
+    	$scope.cellList["4"] = {cellLocation: "4", xostatus: "not yet played", someVar: "A"} ;
+    	$scope.cellList["5"] = {cellLocation: "5", xostatus: "not yet played", someVar: "A"} ;
+    	$scope.cellList["6"] = {cellLocation: "6", xostatus: "not yet played", someVar: "A"} ;
+    	$scope.cellList["7"] = {cellLocation: "7", xostatus: "not yet played", someVar: "A"} ;
+    	$scope.cellList["8"] = {cellLocation: "8", xostatus: "not yet played", someVar: "A"} ;
 
-		$scope.addMoves = function() { 
-		  //Add manually using standard JavaScript
-		  guiClonedDatabase.push( {moveCounter:$scope.moveCounter} );
-		  $scope.moveCounter;
-		  };
+		// $scope.cellList =
+		// {"not yet played", "not yet played", "not yet played", "not yet played", "not yet played", "not yet played", "not yet played", "not yet played", "not yet played"};
+
+		$scope.moveCounter = 0;
+
+		$scope.gameContainer = {
+			cellListArray: $scope.cellList,
+			moveCount: $scope.moveCounter
+		};
 
 
-		$scope.cellList = [
-		{cellLocation: "0", xostatus: "not yet played"}, 
-		{cellLocation: "1", xostatus: "not yet played"}, 
-		{cellLocation: "2", xostatus: "not yet played"}, 
-		{cellLocation: "3", xostatus: "not yet played"}, 
-		{cellLocation: "4", xostatus: "not yet played"}, 
-		{cellLocation: "5", xostatus: "not yet played"}, 
-		{cellLocation: "6", xostatus: "not yet played"}, 
-		{cellLocation: "7", xostatus: "not yet played"}, 
-		{cellLocation: "8", xostatus: "not yet played"}
-		  ]  ;
+		$scope.remoteGameContainer.$bind($scope, "gameContainer") ;
 
-		  $scope.movecounter = 0 ;
+		$scope.$watch('gameContainer', function() {
+			console.log('gameContainer changed!') ;
+		});
+
 
 		  $scope.playerPicks = function(thisCell) {
-		    $scope.movecounter = $scope.movecounter + 1 ;
+		    $scope.gameContainer.moveCount = $scope.gameContainer.moveCount + 1;
 		    console.log("Cell " + thisCell.cellLocation + "\'s status was \'" + thisCell.xostatus + "\'") ;
-		    if (($scope.movecounter % 2) == 1) {
+		    if (($scope.gameContainer.moveCount % 2) == 1) {
 		      thisCell.xostatus = "X" ;  
 		    } else {
 		      thisCell.xostatus = "O" ;
@@ -77,90 +86,90 @@ var guiClonedWarsApp = angular.module('guiClonedWarsApp', ['firebase']);
 		$scope.checkForWinner = function() {
 		  	if (
 		  		(
-		  			($scope.cellList[0].xostatus == "X") && 
-		  			($scope.cellList[1].xostatus == "X") && 
-		  			($scope.cellList[2].xostatus == "X")
+		  			($scope.gameContainer.cellListArray["0"].xostatus == "X") && 
+		  			($scope.gameContainer.cellListArray["1"].xostatus == "X") && 
+		  			($scope.gameContainer.cellListArray["2"].xostatus == "X")
 		  		)
 		  		|| 
 		  		(
-		  			($scope.cellList[3].xostatus == "X") && 
-		  			($scope.cellList[4].xostatus == "X") && 
-		  			($scope.cellList[5].xostatus == "X")
+		  			($scope.gameContainer.cellListArray["3"].xostatus == "X") && 
+		  			($scope.gameContainer.cellListArray["4"].xostatus == "X") && 
+		  			($scope.gameContainer.cellListArray["5"].xostatus == "X")
 		  		)
 		  		||
 		  		(
-		  			($scope.cellList[6].xostatus == "X") && 
-		  			($scope.cellList[7].xostatus == "X") && 
-		  			($scope.cellList[8].xostatus == "X")
+		  			($scope.gameContainer.cellListArray["6"].xostatus == "X") && 
+		  			($scope.gameContainer.cellListArray["7"].xostatus == "X") && 
+		  			($scope.gameContainer.cellListArray["8"].xostatus == "X")
 		  		)
 		  		||
 		  		(
-		  			($scope.cellList[0].xostatus == "X") && 
-		  			($scope.cellList[3].xostatus == "X") && 
-		  			($scope.cellList[6].xostatus == "X")
+		  			($scope.gameContainer.cellListArray["0"].xostatus == "X") && 
+		  			($scope.gameContainer.cellListArray["3"].xostatus == "X") && 
+		  			($scope.gameContainer.cellListArray["6"].xostatus == "X")
 		  		)
 		  		||
 		  		(
-		  			($scope.cellList[1].xostatus == "X") && 
-		  			($scope.cellList[4].xostatus == "X") && 
-		  			($scope.cellList[7].xostatus == "X")
+		  			($scope.gameContainer.cellListArray["1"].xostatus == "X") && 
+		  			($scope.gameContainer.cellListArray["4"].xostatus == "X") && 
+		  			($scope.gameContainer.cellListArray["7"].xostatus == "X")
 		  		)
 		  		||
 		  		(
-		  			($scope.cellList[2].xostatus == "X") && 
-		  			($scope.cellList[5].xostatus == "X") && 
-		  			($scope.cellList[8].xostatus == "X")
+		  			($scope.gameContainer.cellListArray["2"].xostatus == "X") && 
+		  			($scope.gameContainer.cellListArray["5"].xostatus == "X") && 
+		  			($scope.gameContainer.cellListArray["8"].xostatus == "X")
 		  		)
 		  		||
 		  		(
-		  			($scope.cellList[0].xostatus == "X") && 
-		  			($scope.cellList[4].xostatus == "X") && 
-		  			($scope.cellList[8].xostatus == "X")
+		  			($scope.gameContainer.cellListArray["0"].xostatus == "X") && 
+		  			($scope.gameContainer.cellListArray["4"].xostatus == "X") && 
+		  			($scope.gameContainer.cellListArray["8"].xostatus == "X")
 		  		)
 		  	){
 		  		console.log("X is the winner");
 		  	}
 		  	else if (
 		  		(
-		  			($scope.cellList[0].xostatus == "O") && 
-		  			($scope.cellList[1].xostatus == "O") && 
-		  			($scope.cellList[2].xostatus == "O")
+		  			($scope.gameContainer.cellListArray["0"].xostatus == "O") && 
+		  			($scope.gameContainer.cellListArray["1"].xostatus == "O") && 
+		  			($scope.gameContainer.cellListArray["2"].xostatus == "O")
 		  		)
 		  		|| 
 		  		(
-		  			($scope.cellList[3].xostatus == "O") && 
-		  			($scope.cellList[4].xostatus == "O") && 
-		  			($scope.cellList[5].xostatus == "O")
+		  			($scope.gameContainer.cellListArray["3"].xostatus == "O") && 
+		  			($scope.gameContainer.cellListArray["4"].xostatus == "O") && 
+		  			($scope.gameContainer.cellListArray["5"].xostatus == "O")
 		  		)
 		  		||
 		  		(
-		  			($scope.cellList[6].xostatus == "O") && 
-		  			($scope.cellList[7].xostatus == "O") && 
-		  			($scope.cellList[8].xostatus == "O")
+		  			($scope.gameContainer.cellListArray["6"].xostatus == "O") && 
+		  			($scope.gameContainer.cellListArray["7"].xostatus == "O") && 
+		  			($scope.gameContainer.cellListArray["8"].xostatus == "O")
 		  		)
 		  		||
 		  		(
-		  			($scope.cellList[0].xostatus == "O") && 
-		  			($scope.cellList[3].xostatus == "O") && 
-		  			($scope.cellList[6].xostatus == "O")
+		  			($scope.gameContainer.cellListArray["0"].xostatus == "O") && 
+		  			($scope.gameContainer.cellListArray["3"].xostatus == "O") && 
+		  			($scope.gameContainer.cellListArray["6"].xostatus == "O")
 		  		)
 		  		||
 		  		(
-		  			($scope.cellList[1].xostatus == "O") && 
-		  			($scope.cellList[4].xostatus == "O") && 
-		  			($scope.cellList[7].xostatus == "O")
+		  			($scope.gameContainer.cellListArray["1"].xostatus == "O") && 
+		  			($scope.gameContainer.cellListArray["4"].xostatus == "O") && 
+		  			($scope.gameContainer.cellListArray["7"].xostatus == "O")
 		  		)
 		  		||
 		  		(
-		  			($scope.cellList[2].xostatus == "O") && 
-		  			($scope.cellList[5].xostatus == "O") && 
-		  			($scope.cellList[8].xostatus == "O")
+		  			($scope.gameContainer.cellListArray["2"].xostatus == "O") && 
+		  			($scope.gameContainer.cellListArray["5"].xostatus == "O") && 
+		  			($scope.gameContainer.cellListArray["8"].xostatus == "O")
 		  		)
 		  		||
 		  		(
-		  			($scope.cellList[0].xostatus == "O") && 
-		  			($scope.cellList[4].xostatus == "O") && 
-		  			($scope.cellList[8].xostatus == "O")
+		  			($scope.gameContainer.cellListArray["0"].xostatus == "O") && 
+		  			($scope.gameContainer.cellListArray["4"].xostatus == "O") && 
+		  			($scope.gameContainer.cellListArray["8"].xostatus == "O")
 		  		)
 		  	){
 		  		console.log("O is the winner");
