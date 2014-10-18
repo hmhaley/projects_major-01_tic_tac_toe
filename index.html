@@ -25,14 +25,13 @@
 
 	<div id="container-div" ng-controller="GuiClonedWarsController" ng-model="gameContainer">
 
-		Testing Connection: {{testString}}<br>
-
-        MOVE COUNTER: {{gameContainer.moveCount}}<br><br>
+        <br><div class="notification"> {{ gameContainer.notification }}</div>
+         <br><br>
         
         <div class="wrapper" >
             <div ng-repeat="currentCell in gameContainer.cellListArray">
                 <div class="gridbox" ng-click="playerPicks(currentCell)"
-                <!-- ng-class="{xclass: currentCell.xostatus=='X', oclass: currentCell.xostatus =='O'}">
+                <!-- ng-class="{xclass: currentCell.xostatus=='Gates', oclass: currentCell.xostatus =='Jobs'}">
 
 <!-- ng-click="checkForWinner()"
 <span>Cell {{currentCell.xostatus}}</span> -->                </div>

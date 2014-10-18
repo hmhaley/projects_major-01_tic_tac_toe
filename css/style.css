@@ -63,7 +63,6 @@ html, body {
 .wrapper {
   width: 540px;
   height: 540px;
-
   margin: 0 auto;
 }
 
@@ -120,4 +119,12 @@ html, body {
 
 .blankclass {
   background-color: gray ;
+}
+
+.notification {
+    font-style: bold;
+    text-align: center;
+    font-size: 45px;
+    color: #E6C384;
+    margin: 0 auto;
 }
