@@ -6,6 +6,10 @@ $scope.remoteGameContainer = $firebase(new Firebase("https://guiclonedwars.fireb
 
 $scope.testString = "Angular ready and connected";
 
+var audiox = new Audio('audio/saberswipex.wav');
+var audioo = new Audio('audio/saberswipeo.wav');
+var audiotie = new Audio('audio/saberclashtie.wav');
+
 
 		// $scope.players = [
 		// 	{
@@ -72,18 +76,39 @@ $scope.testString = "Angular ready and connected";
 			console.log('gameContainer changed!') ;
 		});
 
+		// $scope.playAudioTagX = function(){
+		// 	var audiox = document.getElementById("audiotagx");
+		// 	audio.load();
+		// 	audio.play();
+		// };
+
+// var audio = new Audio('../audio/saberclashtie.wav');
+
 
 		  $scope.playerPicks = function(thisCell) {
 		    $scope.gameContainer.moveCount = $scope.gameContainer.moveCount + 1;
 		    console.log("Cell " + thisCell.cellLocation + "\'s status was \'" + thisCell.xostatus + "\'") ;
 		    if (($scope.gameContainer.moveCount % 2) == 1) {
-		      thisCell.xostatus = "Gates" ;  
-		    } else {
+		      thisCell.xostatus = "Gates" ;
+		    }
+		    else {
 		      thisCell.xostatus = "Jobs" ;
 		    } 
 		    console.log("Cell " + thisCell.cellLocation + "\'s status now is \'" + thisCell.xostatus + "\'") ;
-		    $scope.checkForWinner()
+		    $scope.checkForWinner();
+		    // $scope.play_single_sound()
 		  } ;
+
+		// $scope.play_single_sound = function() {
+		// 	if (document.getElementsbyClassName == "oclass"){
+		// 			document.getElementById('audiotago').play();
+		// 	}
+		// 	else if (document.getElementsbyClassName == "oclass"){
+		// 			document.getElementById('audiotago').play();
+		// 	}
+		// 	else {console.log("No audio to be played");
+		// 	};
+		// }
 
 		$scope.checkForWinner = function() {
 		  	if (
@@ -128,9 +153,15 @@ $scope.testString = "Angular ready and connected";
 		  			($scope.gameContainer.cellListArray["4"].xostatus == "Gates") && 
 		  			($scope.gameContainer.cellListArray["8"].xostatus == "Gates")
 		  		)
+		  		||
+		  		(
+		  			($scope.gameContainer.cellListArray["2"].xostatus == "Gates") && 
+		  			($scope.gameContainer.cellListArray["4"].xostatus == "Gates") && 
+		  			($scope.gameContainer.cellListArray["6"].xostatus == "Gates")
+		  		)
 		  	){
 		  		$scope.gameContainer.notification = "Grand Master GATES Wins!!!";
-
+		  		audiox.play();
 		  	}
 		  	else if (
 		  		(
@@ -174,8 +205,15 @@ $scope.testString = "Angular ready and connected";
 		  			($scope.gameContainer.cellListArray["4"].xostatus == "Jobs") && 
 		  			($scope.gameContainer.cellListArray["8"].xostatus == "Jobs")
 		  		)
+		  		||
+		  		(
+		  			($scope.gameContainer.cellListArray["2"].xostatus == "Jobs") && 
+		  			($scope.gameContainer.cellListArray["4"].xostatus == "Jobs") && 
+		  			($scope.gameContainer.cellListArray["6"].xostatus == "Jobs")
+		  		)
 		  	){
 		  		$scope.gameContainer.notification = "Lord Supreme Commander JOBS Wins!!!";
+		  		audioo.play();
 		  	}
 		  	else if
 		  		(
@@ -187,10 +225,12 @@ $scope.testString = "Angular ready and connected";
 		  	}
 		  	else {
 		  		console.log("These Guys are in a fight to a Tie!");
+		  		 audiotie.play();
 		    }
 	    };
 
 });
+
 
 // function checkForWinnerFunction() {
 //     document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
